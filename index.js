@@ -1,12 +1,8 @@
-var requestLib = require("request");
 var bridge;
-var PORT = 9898; // slack needs to hit this port e.g. use "ngrok 9898"
 var ROOM_ID = "!YiuxjYhPLIZGVVkFjT:localhost"; // this room must have join_rules: public
-var SLACK_WEBHOOK_URL = "https://hooks.slack.com/services/AAAA/BBBBB/CCCCC";
 var Cli = require("matrix-appservice-bridge").Cli;
 var Bridge = require("matrix-appservice-bridge").Bridge;
 var AppServiceRegistration = require("matrix-appservice-bridge").AppServiceRegistration;
-
 
 var https = require('https');
 var roomId = process.env.ROOM_ID;
@@ -22,8 +18,9 @@ var options = {
 
 var req = https.request(options, function(res) {
   res.on('data', function(chunk) {
-    var params = JSON.parse(chunk.toString());
+    var msg = chunk.toString();
     if (msg !== heartbeat) {
+      var params = JSON.parse(msg);
       var intent = bridge.getIntent("@gitter" + params.fromUser.username + ":localhost");
       intent.sendText(ROOM_ID, params.text);
     }
@@ -69,8 +66,7 @@ new Cli({
               'Content-Type': 'application/json',
               'Accept': 'application/json'
             }
-          },
-          function(err, res) {
+          }, function(err, res) {
             if (err) {
               console.log("HTTP Error: %s", err);
             }
