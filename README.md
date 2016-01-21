@@ -4,4 +4,4 @@ npm install matrix-appservice-bridge
 npm install request
 
 ```
-$ TOKEN=<token> ROOM_ID=<room_id> node gitter-stream.js
+$ TOKEN=<token> ROOM_ID=<room_id> node index.js
