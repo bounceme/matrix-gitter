@@ -1,0 +1,10 @@
+{
+  "name": "matrix-gitter",
+  "version": "0.1.0",
+  "description": "A Matrix <--> gitter bridge",
+  "main": "index.js",
+  "keywords": [
+    "matrix-org",
+    "gitter"
+  ]
+}
