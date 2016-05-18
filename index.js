@@ -66,13 +66,8 @@ new Cli({
               'Content-Type': 'application/json',
               'Accept': 'application/json'
             }
-          }, function(err, res) {
-            if (err) {
-              console.log('HTTP Error: %s', err);
-            }
-            else {
-              console.log('HTTP %s', res.statusCode);
-            }
+          }, function(res) {
+            console.log(res.statusCode);
           });
           postGitter.on('error', function(e) {
             console.log('Something went wrong: ' + e.message);
